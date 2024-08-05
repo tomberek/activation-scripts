@@ -3,9 +3,9 @@
     { self, nixpkgs }:
     {
       packages = builtins.mapAttrs (_: pkgs: {
-        virtualenv-hook = pkgs.runCommand "virtualenv-hook" { } ''
+        virtualenv-hook = pkgs.runCommand "0900_virtualenv-hook" { } ''
           mkdir -p $out/etc/profile.d
-          cat > $out/etc/profile.d/virtualenv-hook.sh <<'EOF'
+          cat > $out/etc/profile.d/0900_virtualenv-hook.sh <<'EOF'
           #!/bin/sh
           export virtualEnv="''${virtualEnv-./nb-venv/}"
           if [ -d "$virtualEnv" ]; then
@@ -25,7 +25,7 @@
             echo "done."
           fi
           EOF
-          chmod +x $out/etc/profile.d/virtualenv-hook.sh
+          chmod +x $out/etc/profile.d/0900_virtualenv-hook.sh
         '';
       }) nixpkgs.legacyPackages;
     };
